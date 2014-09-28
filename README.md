@@ -1,7 +1,7 @@
 To run the application you will need:
-	- Java 8
-	- Postgresql 9.1 +
-	- Gradle
+	Java 8
+	Postgresql 9.1 +
+	Gradle
 
 
 Run the following commands:
