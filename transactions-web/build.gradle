@@ -2,5 +2,14 @@ apply plugin: 'jetty'
 apply plugin: 'eclipse-wtp'
 
 dependencies {
+    compile project(':transactions-core')
+
+    // JSON
+    compile("com.fasterxml.jackson.core:jackson-databind")
+
+    // web
     compile("org.springframework.boot:spring-boot-starter-web")
+
+    // test
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }

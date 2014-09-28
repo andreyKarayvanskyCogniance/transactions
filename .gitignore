@@ -23,3 +23,5 @@ build/
 /.idea
 
 .gradle/
+*-core/.gitignore
+*-web/.gitignore

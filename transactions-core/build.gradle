@@ -1,3 +1,13 @@
 bootRepackage {
     enabled = false
 }
+
+dependencies {
+    // validation
+    compile("javax.validation:validation-api")
+    compile("org.hibernate:hibernate-validator")
+
+    // DB
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+}
