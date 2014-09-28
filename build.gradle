@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE'
+    }
+}
+
+subprojects {
+    apply plugin: 'spring-boot'
+
+    dependencies {
+        versionManagement 'io.spring.platform:platform-versions:1.0.2.RELEASE@properties'
+        testCompile 'junit:junit'
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+       mavenLocal()
+       mavenCentral()
+    }
+
+    version = '0.1'
+}
