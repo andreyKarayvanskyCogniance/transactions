@@ -1,6 +1,8 @@
 package demo.controllers;
 
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -8,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +40,23 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
     }
 
     @Test
+    public void list() throws Exception {
+        final List<Account> list1 = listJson(Account.class);
+        
+        assertThat(list1, empty());
+        
+        final Account saved = accountRepository.save(normalAccount);
+
+        final List<Account> list2 = listJson(Account.class);
+
+        assertThat(list2, hasSize(1));
+        assertThat(list2.get(0), equalTo(saved));
+    }
+
+    @Test
     public void create() throws Exception {
         final Long id = postCreateJson(normalAccount);
+        normalAccount.setId(id);
 
         assertThat(accountRepository.findOne(id), equalTo(normalAccount));
     }
@@ -54,7 +72,7 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
     @Test
     public void codeConstraint() throws Exception {
         // 21 symbols name (20 max allowed)
-        normalAccount.setName("_123456789_123456789=");
+        normalAccount.setCode("_123456789_123456789=");
         
         postCreateJson(normalAccount, status().isBadRequest());
     }
@@ -65,9 +83,15 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
 
         saved.setName("Updated test account");
 
-        final Account updated = putUpdateJson(saved, saved.getId());
+        putUpdateJson(saved, status().isOk(), saved.getId());
 
-        assertThat(updated, equalTo(saved));
+        assertThat(accountRepository.findOne(saved.getId()), equalTo(saved));
+    }
+
+    @Test
+    public void updateNonExisting() throws Exception {
+        // invalid id here
+        putUpdateJson(normalAccount, status().isNotFound(), 999l);
     }
 
     @Test
@@ -100,7 +124,7 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
 
     @Override
     protected String url() {
-        return "/account";
+        return "/account/";
     }
 
 }

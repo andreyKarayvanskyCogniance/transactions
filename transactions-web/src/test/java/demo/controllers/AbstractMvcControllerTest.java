@@ -5,11 +5,13 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
@@ -51,6 +53,14 @@ public abstract class AbstractMvcControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
+    protected <T> List<T> listJson(Class<T> clazz, Object... urlPaths) throws Exception {
+        final MvcResult res = mockMvc.perform(
+                get(fullUrl(urlPaths))).andExpect(status().isOk()).andReturn();
+        
+        return om.readValue(res.getResponse().getContentAsByteArray(),
+                om.getTypeFactory().constructCollectionType(List.class, clazz));
+    }
+    
     protected <T> Long postCreateJson(final T bodyObj, final Object... urlPaths) throws Exception {
         final MvcResult result = postCreateJson(bodyObj, status().isCreated(), urlPaths).andReturn();
 
@@ -74,13 +84,6 @@ public abstract class AbstractMvcControllerTest {
                 .andExpect(status);
     }
 
-    @SuppressWarnings("unchecked")
-    protected <T> T putUpdateJson(final T bodyObj, final Object... urlPaths) throws Exception {
-        MvcResult res = putUpdateJson(bodyObj, status().isOk(), urlPaths).andReturn();
-
-        return (T) om.readValue(res.getResponse().getContentAsByteArray(), bodyObj.getClass());
-    }
-
     protected <T> ResultActions putUpdateJson(final T bodyObj, ResultMatcher status, final Object... urlPaths)
             throws Exception {
 
@@ -90,7 +93,6 @@ public abstract class AbstractMvcControllerTest {
     }
 
     protected ResultActions deleteJson(ResultMatcher status, final Object... urlPaths) throws Exception {
-
         return mockMvc.perform(delete(fullUrl(urlPaths))).andExpect(status);
     }
 
