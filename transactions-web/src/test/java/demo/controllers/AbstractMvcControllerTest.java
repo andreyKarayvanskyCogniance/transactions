@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import demo.Application;
@@ -53,11 +54,13 @@ public abstract class AbstractMvcControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-    protected <T> List<T> listJson(Class<T> clazz, Object... urlPaths) throws Exception {
+    protected <T> List<T> listPageContent(Class<T> clazz, Object... urlPaths) throws Exception {
         final MvcResult res = mockMvc.perform(
                 get(fullUrl(urlPaths))).andExpect(status().isOk()).andReturn();
         
-        return om.readValue(res.getResponse().getContentAsByteArray(),
+        final JsonNode contentNode = om.readValue(res.getResponse().getContentAsByteArray(), JsonNode.class);
+        
+        return om.convertValue(contentNode.findPath("content"),
                 om.getTypeFactory().constructCollectionType(List.class, clazz));
     }
     

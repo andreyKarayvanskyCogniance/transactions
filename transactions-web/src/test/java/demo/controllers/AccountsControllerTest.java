@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,13 +41,13 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
 
     @Test
     public void list() throws Exception {
-        final List<Account> list1 = listJson(Account.class);
+        final List<Account> list1 = listPageContent(Account.class);
         
         assertThat(list1, empty());
         
         final Account saved = accountRepository.save(normalAccount);
 
-        final List<Account> list2 = listJson(Account.class);
+        final List<Account> list2 = listPageContent(Account.class);
 
         assertThat(list2, hasSize(1));
         assertThat(list2.get(0), equalTo(saved));
@@ -105,7 +104,7 @@ public class AccountsControllerTest extends AbstractMvcControllerTest {
         assertThat(accountRepository.findOne(saved.getId()), nullValue());
     }
 
-    @Test @Ignore // TODO remove ignore and add implementation
+    @Test
     public void deleteRejected_accountHasTransacton() throws Exception {
         final Account account = accountRepository.save(normalAccount);
         

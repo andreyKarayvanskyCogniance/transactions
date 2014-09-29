@@ -13,7 +13,13 @@ public class ExceptionHandlerController {
     public static final String DEFAULT_ERROR_VIEW = "error";
 
     @ExceptionHandler(value = {ConstraintViolationException.class})
-    public ResponseEntity<String> defaultErrorHandler(ConstraintViolationException e) {
+    public ResponseEntity<String> constraintViolationErrorHandler(ConstraintViolationException e) {
         return new ResponseEntity<String>(e.getConstraintViolations().toString(), HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    public ResponseEntity<String> illegalArgumentErrorHandler(IllegalArgumentException e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 }

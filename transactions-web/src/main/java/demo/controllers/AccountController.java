@@ -1,8 +1,8 @@
 package demo.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +24,8 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Account> list() {
-        return accountService.list();
+    public Page<Account> list(Pageable pageable) {
+        return accountService.list(pageable);
     }
 
     @RequestMapping(method = RequestMethod.POST)
