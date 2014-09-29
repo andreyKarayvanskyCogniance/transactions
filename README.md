@@ -16,3 +16,4 @@ The application will be avaliable on
 Alternatively you can deploy WAR from `transactions-web/build` to your favorite web app container (Tomcat or Jetty).
 
 No database installation required. H2 in memory is currently used. With Spring Data JPA H2 can be replaced with any commonly available relational database like MySql or Postgresql.
++
