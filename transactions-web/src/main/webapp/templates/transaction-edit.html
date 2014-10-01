@@ -4,11 +4,11 @@
             <input class="col-md-1 col-lg-1" type="button" value="Cancel" ng-click="editTransactionController.cancelEdit()"/>
             <select class="col-md-1 col-lg-1 contentcol" ng-model="editedTransaction.type"><option value="DEBIT">DEBIT</option><option value="CREDIT">CREDIT</option></select>
             <div class="col-md-1 col-lg-1 contentcol">
-                <input type="text" ng-model="editedTransaction.amount">
+                <input type="text" ng-model="editedTransaction.amount" required>
             </div>
-            <input class="col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="editedTransaction.date">
+            <input class="col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="editedTransaction.date" required>
             <div class="col-md-7 col-lg-7 contentcol">
-                <input type="text" ng-model="editedTransaction.description" maxlength="100">
+                <input type="text" ng-model="editedTransaction.description" maxlength="100" required>
             </div>
         </div>
         <div class="row">

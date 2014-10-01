@@ -4,7 +4,6 @@
         $scope.isFirstPage = false;
         $scope.isLastPage = false;
         $scope.loadAccounts = function(){
-            console.log('reload accounts');
             accountService.list().success(accountsListLoadHandler).error(accountsListErrorHandler);
         };
         this.nextPage = function(){

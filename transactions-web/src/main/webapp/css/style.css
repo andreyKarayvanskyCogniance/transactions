@@ -1,30 +1,45 @@
-        html, body{
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-        .nopaddings {
-            padding: 0;
-            text-align: left;
-        }
-        textarea, input[type="text"]{
-            margin: 0;
-            width: 100%;
-            margin: 0;
-        }
-        .header{
-            font-weight: bold;
-            background-color: #eee;
-        }
-        [class*="col-"] {
-            height: 26px;
-        }
-        .contentcol{
-            padding: 0;
-        }
-        .edit{
-            outline: 2px solid #eee;
-        }
-        .row{
-            margin-bottom: 10px;
-        }
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.nopaddings {
+    padding: 0;
+    text-align: left;
+}
+textarea, input[type="text"]{
+    margin: 0;
+    width: 100%;
+    margin: 0;
+}
+.header{
+    font-weight: bold;
+    background-color: #eee;
+}
+[class*="col-"] {
+    height: 26px;
+}
+.contentcol{
+    padding: 0;
+}
+.edit{
+    outline: 2px solid #eee;
+}
+input[type=text]{
+    border: none;
+    outline: 1px solid #eee;
+    min-height: 26px;
+}
+.row{
+    margin-bottom: 10px;
+}
+input[type=button], input[type=submit]{
+    border: none;
+    outline: none;
+    background: none;
+    color: #6666cc;
+    text-decoration: none;
+}
+input[type=button]:hover, input[type=submit]:hover{
+    text-decoration: underline;
+}

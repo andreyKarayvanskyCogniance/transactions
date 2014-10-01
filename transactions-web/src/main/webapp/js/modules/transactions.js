@@ -9,7 +9,7 @@
         }
     }]);
     transactions.controller('NewTransactionController', ['$scope', 'transactionService', function($scope, transactionService){
-        $scope.newTransaction = {name:"", code:""};
+        $scope.newTransaction = {description:"", amount:1, date:new Date()};
         this.addNewTransaction = function(accountId){
             transactionService.add(accountId, $scope.newTransaction).success(function(){
                 $scope.newTransaction = {name:"", code:""};

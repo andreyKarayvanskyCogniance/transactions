@@ -1,9 +1,11 @@
 <div class="row" ng-controller="NewAccountController as newAccountController">
-    <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5v contentcol">
-        <input type="text" ng-model="newAccount.name" placeholder="Enter account name" maxlength="50">
-    </div>
-    <div class="col-md-4 col-lg-4 contentcol">
-        <input type="text" ng-model="newAccount.code" placeholder="Enter account code" maxlength="50">
-    </div>
-    <input type="button" value="Add Account" ng-click="newAccountController.addNewAccount()" class="col-md-2 col-lg-2">
+    <form name="newAccountForm" ng-submit="newAccountController.addNewAccount()">
+        <div class="col-md-offset-1 col-lg-offset-1 col-md-5 col-lg-5v contentcol" ng-class="{'has-error': newAccountForm.name.$invalid && !newAccountForm.name.$pristine}">
+            <input type="text" name="name" ng-model="newAccount.name" placeholder="Enter account name" ng-minlength="3" ng-maxlength="50" required>
+        </div>
+        <div class="col-md-4 col-lg-4 contentcol" ng-class="{'has-error': newAccountForm.code.$invalid && !newAccountForm.code.$pristine}">
+            <input type="text" name="code" ng-model="newAccount.code" placeholder="Enter account code" ng-minlength="3" ng-maxlength="50" required>
+        </div>
+        <input type="submit" value="Add Account" class="col-md-2 col-lg-2">
+    </form>
 </div>

@@ -2,8 +2,8 @@
     <!-- account -->
     <form>
         <input type="button" value="Cancel" class="col-md-1 col-lg-1" ng-click="editAccountController.cancelEdit()"/>
-        <div class="col-md-5 col-lg-5 contentcol"><input type="text" ng-model="editedAccount.name" maxlength="50"/></div>
-        <div class="col-md-4 col-lg-4 contentcol"><input type="text" ng-model="editedAccount.code" maxlength="50"/></div>
+        <div class="col-md-5 col-lg-5 contentcol"><input type="text" ng-model="editedAccount.name" maxlength="50" required/></div>
+        <div class="col-md-4 col-lg-4 contentcol"><input type="text" ng-model="editedAccount.code" maxlength="50" required/></div>
         <input type="button" value="Save Changes" ng-click="editAccountController.saveEdit()" class="col-md-2 col-lg-2"/>
     </form>
 </div>

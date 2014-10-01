@@ -45,7 +45,6 @@
         this.addNewAccount = function(){
             accountService.add($scope.newAccount).success(function(){
                 $scope.newAccount = {name:"", code:""};
-                console.log('save new account');
                 $scope.loadAccounts();
             }).error(function(data){
                 alert('Error: '+data.message);
@@ -71,7 +70,6 @@
             accountService.update($scope.editedAccount).success(function(){
                 currentAccount.edit = false;
                 $scope.editedAccount = {};
-                console.log('save updated account');
                 $scope.loadAccounts();
             }).error(function(data){
                 alert('Error: '+data.message);
