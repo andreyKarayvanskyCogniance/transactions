@@ -1,23 +1,29 @@
 <div ng-controller="AccountController as accountController">
     <div class="row">
         <!-- account -->
-        <input type="button" value="Edit" class="col-sm-1 col-md-1 col-lg-1" ng-click="accountController.editAccount()"/>
-        <div class="col-sm-5 col-md-5 col-lg-5">
-            {{account.name}}
+        <input type="button" value="Edit" class="col-sm-1 col-md-1 col-lg-1 hidden-xs" ng-click="accountController.editAccount()"/>
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <label class="hidden-sm hidden-md hidden-lg">Name: </label>{{account.name}}
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            {{account.code}}
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <label class="hidden-sm hidden-md hidden-lg">Code: </label>{{account.code}}
         </div>
-        <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-sm-1 col-md-1 col-lg-1 contentcol" ng-click="accountController.switchState()"/>
-        <input type="button" value="Delete" class="col-sm-1 col-md-1 col-lg-1" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
+        <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-sm-1 col-md-1 col-lg-1 hidden-xs contentcol" ng-click="accountController.switchState()"/>
+        <input type="button" value="Delete" class="col-sm-1 col-md-1 col-lg-1 hidden-xs" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
+        <div class="col-xs-12 visible-xs">
+            <input type="button" value="Edit" ng-click="accountController.editAccount()"/>
+            <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" ng-click="accountController.switchState()"/>
+            <input type="button" value="Delete" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
+        </div>
     </div>
     <div ng-if="currentlyExpandedAccountView==account.id && expanded==true">
         <div class="row">
             <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-10 col-md-12 col-lg-10">
-                <h4>Transactions for "{{account.name}}":</h4>
+                <h4 class="hidden-xs">Transactions for "{{account.name}}":</h4>
+                <h5 class="visible-xs">Transactions for "{{account.name}}":</h5>
             </div>
         </div>
-        <div class="row header">
+        <div class="row header hidden-xs">
             <div class="col-sm-1 col-md-1 col-lg-1"></div>
             <div class="col-sm-1 col-md-1 col-lg-1">
                 Type

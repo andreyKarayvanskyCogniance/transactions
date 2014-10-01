@@ -1,9 +1,13 @@
 <div class="row edit" ng-controller="EditAccountController as editAccountController">
     <!-- account -->
     <form name="editAccountForm" ng-submit="editAccountController.saveEdit()">
-        <input type="button" value="Cancel" class="col-sm-1 col-md-1 col-lg-1" ng-click="editAccountController.cancelEdit()"/>
+        <input type="button" value="Cancel" class="col-sm-1 col-md-1 col-lg-1 hidden-xs" ng-click="editAccountController.cancelEdit()"/>
         <div class="col-sm-5 col-md-5 col-lg-5 contentcol"><input type="text" ng-model="editedAccount.name" maxlength="50" ng-required/></div>
         <div class="col-sm-4 col-md-4 col-lg-4 contentcol"><input type="text" ng-model="editedAccount.code" maxlength="50" ng-required/></div>
-        <input type="submit" value="Save Changes" class="col-sm-2 col-md-2 col-lg-2"/>
+        <input type="submit" value="Save Changes" class="col-sm-2 col-md-2 col-lg-2 hidden-xs"/>
+        <div class="col-xs-12 visible-xs">
+            <input type="button" value="Cancel" ng-click="editAccountController.cancelEdit()"/>
+            <input type="submit" value="Save"/>
+        </div>
     </form>
 </div>
