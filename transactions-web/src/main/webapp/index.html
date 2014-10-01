@@ -13,30 +13,30 @@
 <div class="container-fluid" ng-controller="AppController as appController">
     <div class="row">
         <!-- account titles -->
-        <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 nopaddings">
+        <div class="col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 nopaddings">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 col-lg-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <h4>Accounts:</h4>
                     </div>
                 </div>
                 <div class="row header">
                     <!-- account titles -->
-                    <div class="col-md-1 col-lg-1">
+                    <div class="col-sm-1 col-md-1 col-lg-1">
                         <!-- edit -->
                     </div>
-                    <div class="col-md-5 col-lg-5">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
                         Account
                     </div>
-                    <div class="col-md-4 col-lg-4">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
                         Code
                     </div>
-                    <div class="col-md-2 col-lg-2">
+                    <div class="col-sm-4 col-md-2 col-lg-2">
                         <!-- view transactions & delete -->
                     </div>
                 </div>
                 <accountadd></accountadd>
-                <div ng-repeat="account in accounts">
+                <div ng-repeat="account in accounts" ng-class-even="'even'" ng-class-odd="'odd'">
                     <div ng-if="account.edit==true">
                         <accountedit/>
                     </div>
@@ -46,8 +46,8 @@
                 </div>
                 <div class="row">
                     <!-- account titles -->
-                    <input type="button" value="Prev Page" class="col-md-2 col-lg-2" ng-click="appController.prevPage()" ng-show="!isFirstPage">
-                    <input type="button" value="Next Page" class="col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2" ng-click="appController.nextPage()" ng-show="!isLastPage">
+                    <input type="button" value="Prev Page" class="col-sm-2 col-md-2 col-lg-2" ng-click="appController.prevPage()" ng-show="!isFirstPage">
+                    <input type="button" value="Next Page" class="col-sm-offset-8 col-md-offset-8 col-lg-offset-8 col-sm-2 col-md-2 col-lg-2" ng-click="appController.nextPage()" ng-show="!isLastPage">
                 </div>
             </div>
         </div>

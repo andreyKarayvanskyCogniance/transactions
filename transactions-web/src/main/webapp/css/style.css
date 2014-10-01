@@ -29,7 +29,8 @@ textarea, input[type=text]{
     min-height: 26px;
 }
 .row{
-    margin-bottom: 10px;
+    padding: 5px 0;
+    margin: 0;
 }
 input[type=button], input[type=submit]{
     border: none;
@@ -40,4 +41,11 @@ input[type=button], input[type=submit]{
 }
 input[type=button]:hover, input[type=submit]:hover{
     text-decoration: underline;
+}
+.even{
+    background-color: #ffffff;
+}
+.odd{
+    background-color: #f9f9f9;
+
 }

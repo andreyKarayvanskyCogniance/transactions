@@ -1,30 +1,30 @@
 <div ng-controller="AccountController as accountController">
     <div class="row">
         <!-- account -->
-        <input type="button" value="Edit" class="col-md-1 col-lg-1" ng-click="accountController.editAccount()"/>
-        <div class="col-md-5 col-lg-5">
+        <input type="button" value="Edit" class="col-sm-1 col-md-1 col-lg-1" ng-click="accountController.editAccount()"/>
+        <div class="col-sm-5 col-md-5 col-lg-5">
             {{account.name}}
         </div>
-        <div class="col-md-4 col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             {{account.code}}
         </div>
-        <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-md-1 col-lg-1 contentcol" ng-click="accountController.switchState()"/>
-        <input type="button" value="Delete" class="col-md-1 col-lg-1" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
+        <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-sm-1 col-md-1 col-lg-1 contentcol" ng-click="accountController.switchState()"/>
+        <input type="button" value="Delete" class="col-sm-1 col-md-1 col-lg-1" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
     </div>
     <div ng-if="expanded==true">
         <h4>Transactions for "{{account.name}}":</h4>
         <div class="row header">
-            <div class="col-md-1 col-lg-1"></div>
-            <div class="col-md-1 col-lg-1">
+            <div class="col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
                 Type
             </div>
-            <div class="col-md-1 col-lg-1">
+            <div class="col-sm-1 col-md-1 col-lg-1">
                 Amount
             </div>
-            <div class="col-md-2 col-lg-2">
+            <div class="col-sm-2 col-md-2 col-lg-2">
                 Date
             </div>
-            <div class="col-md-7 col-lg-7">
+            <div class="col-sm-7 col-md-7 col-lg-7">
                 Description
             </div>
         </div>
@@ -39,8 +39,8 @@
         </div>
         <div class="row">
             <!-- account titles -->
-            <input type="button" value="Prev Page" class="col-md-2 col-lg-2" ng-click="accountController.prevPage()" ng-show="!isFirstTransactionsPage">
-            <input type="button" value="Next Page" class="col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2" ng-click="accountController.nextPage()" ng-show="!isLastTransactionsPage">
+            <input type="button" value="Prev Page" class="col-sm-2 col-md-2 col-lg-2" ng-click="accountController.prevPage()" ng-show="!isFirstTransactionsPage">
+            <input type="button" value="Next Page" class="col-sm-offset-8 col-md-offset-8 col-lg-offset-8 col-sm-2 col-md-2 col-lg-2" ng-click="accountController.nextPage()" ng-show="!isLastTransactionsPage">
         </div>
         <hr width="100%">
     </div>
