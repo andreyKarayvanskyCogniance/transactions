@@ -6,7 +6,7 @@
     /**
      * View account controller
      */
-    accounts.controller('AccountController', ['$scope', 'accountService', 'transactionService', function($scope, accountService, transactionService){
+    accounts.controller('AccountController', ['$scope', '$rootScope', 'accountService', 'transactionService', function($scope, $rootScope, accountService, transactionService){
         $scope.expanded = false;
         $scope.isRemovable = false;
         $scope.isFirstTransactionsPage = false;
@@ -31,6 +31,7 @@
         this.switchState = function(){
             $scope.expanded = !$scope.expanded;
             if($scope.expanded){
+                $rootScope.currentlyExpandedAccountView = $scope.account.id;
                 $scope.loadTransactions();
             }
         };
