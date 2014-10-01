@@ -56,53 +56,50 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Transactions</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="col-md-1">#</th>
+                        <th class="col-md-6">Name</th>
+                        <th class="col-md-3">Code</th>
+                        <th class="col-md-1"></th>
+                        <th class="col-md-1"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{{acc.id}}</td>
-                        <td>
+                        <td class="col-md-1">{{acc.id}}</td>
+                        <td class="col-md-6">
                           <!-- editable username (text with validation) -->
                           <span editable-text="acc.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, acc.id)" e-required>
                             {{ acc.name || 'empty' }}
                           </span>
                         </td>
-                        <td>
+                        <td class="col-md-3">
                           <span editable-text="acc.code" e-name="code" e-form="rowform" onbeforesave="checkCode($data, acc.id)" e-required>
                             {{ acc.code || 'empty' }}
                           </span>
                         </td>
-                        <td><span class="badge">14</span></td>
-                        <td style="white-space: nowrap">
+                        <td class="col-md-1" style="white-space: nowrap">
                           <!-- form -->
                           <form editable-form name="rowform" onbeforesave="saveAccount($data, acc.id, acc.version)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == acc">
-                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-sm">
                               save
                             </button>
-                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default btn-sm">
                               cancel
                             </button>
                           </form>
                           <div class="buttons" ng-show="!rowform.$visible">
-                            <button class="btn btn-primary btn-xs" ng-click="rowform.$show()">
-                              <span class="glyphicon glyphicon-edit"></span>
+                            <button class="btn btn-primary btn-sm" ng-click="rowform.$show()">
+                              <span class="glyphicon glyphicon-pencil"></span>
                               edit
                             </button>
-                            <button class="btn btn-danger btn-xs" ng-click="removeAccount($index)">
+                            <button class="btn btn-danger btn-sm" ng-click="removeAccount($index)">
                               <span class="glyphicon glyphicon-remove"></span>
                               del
                             </button>
                           </div>  
                         </td>
-                        <td>
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{acc.id}}" ng-click="fetchTransactions(acc.id)" class="btn btn-warning btn-xs" role="button">
+                        <td class="col-md-1">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{acc.id}}" ng-click="fetchTransactions(acc.id)" class="btn btn-warning btn-sm" role="button">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                           </a>
                         </td>
@@ -139,8 +136,6 @@
                   <a href="" ng-click="" class="btn btn-primary btn-ms" role="button">
                     <span class="glyphicon glyphicon-plus"> Add New Transaction</span>
                   </a>
-
-                s
               </div>
             </div>
 

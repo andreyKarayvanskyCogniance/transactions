@@ -10,7 +10,7 @@ app.controller('AccountListCtrl', function ($scope, $http) {
     $scope.accounts = data;
 
     $scope.curPage = 0;
-    $scope.pageSize = 7;
+    $scope.pageSize = 20;
     $scope.numberOfPages = function() {
         return Math.ceil($scope.accounts.length / $scope.pageSize);
     };
