@@ -7,11 +7,6 @@ html, body{
     padding: 0;
     text-align: left;
 }
-textarea, input[type="text"]{
-    margin: 0;
-    width: 100%;
-    margin: 0;
-}
 .header{
     font-weight: bold;
     background-color: #eee;
@@ -25,7 +20,10 @@ textarea, input[type="text"]{
 .edit{
     outline: 2px solid #eee;
 }
-input[type=text]{
+textarea, input[type=text]{
+    margin: 0;
+    width: 100%;
+    padding: 0;
     border: none;
     outline: 1px solid #eee;
     min-height: 26px;
