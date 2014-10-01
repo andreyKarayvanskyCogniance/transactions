@@ -7,14 +7,17 @@ app.run(function(editableOptions) {
 app.controller('AccountListCtrl', function ($scope, $http) {
 
   $http.get('account').success(function(data) {
-    $scope.accounts = data;
+    $scope.accounts = data.content;
 
     $scope.curPage = 0;
     $scope.pageSize = 20;
     $scope.numberOfPages = function() {
         return Math.ceil($scope.accounts.length / $scope.pageSize);
     };
-
+    
+    $scope.accounts.forEach(function(acc) { 
+        $scope.fetchTransactions(acc.id); 
+    })
   });
   
   $scope.trMap = new Object();
@@ -22,7 +25,7 @@ app.controller('AccountListCtrl', function ($scope, $http) {
   $scope.fetchTransactions = function(accountId) {
     $http.get('account/' + accountId + '/transaction').success(function(data) {
       
-      $scope.trMap[accountId] = data;
+      $scope.trMap[accountId] = data.content;
     });
   };
 
@@ -35,7 +38,21 @@ app.controller('AccountListCtrl', function ($scope, $http) {
             return $http.post('/account', data);
         }
   };
-  
+
+  $scope.removeAccount = function(index, id) {
+      //$scope.fetchTransactions(id);
+
+	  var trs = $scope.trMap[id];
+      if (trs.length > 0) {
+          alert('Cannot delete account that has transactions.')
+      } else if (confirm("You are about to delete account " + id)) {
+              $http.delete('/account/' + id).success(function(data) {
+              $('.panel')[index].remove();
+              $scope.accounts.slice(index, 1);
+          });
+      }
+  };
+
 //add account
   $scope.addAccount = function() {
     $scope.inserted = {

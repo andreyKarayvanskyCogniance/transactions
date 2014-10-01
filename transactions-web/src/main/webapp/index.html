@@ -13,13 +13,13 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/bootstrap-editable.css"/>
-    <link rel="stylesheet" href="css/xeditable.css"/>
+<!--     <link rel="stylesheet" href="css/bootstrap-editable.css"/>
+ -->    <link rel="stylesheet" href="css/xeditable.css"/>
     <link rel="stylesheet" href="css/main.css">
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
-  <body >
+  <body ng-controller="AccountListCtrl">
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <h3>Hello, this is Transactions demo application!</h3>
-          <a class="btn btn-primary" role="button" ng-click="addAccount()">Add Account</a>
+          <a class="btn btn-primary" role="button" data-toggle="modal" data-target="#myModal" ng-click="addAccount()">Add Account</a>
           
         </div>
       </div>
@@ -48,8 +48,8 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-        <div class="panel-group" id="accordion" ng-controller="AccountListCtrl">
-          <div class="panel panel-info" ng-repeat="acc in accounts.content | pagination: curPage * pageSize | limitTo: pageSize">
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-info" ng-repeat="acc in accounts | pagination: curPage * pageSize | limitTo: pageSize">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <div class="table-responsive">
@@ -92,14 +92,14 @@
                               <span class="glyphicon glyphicon-pencil"></span>
                               edit
                             </button>
-                            <button class="btn btn-danger btn-sm" ng-click="removeAccount($index)">
+                            <button class="btn btn-danger btn-sm" ng-click="removeAccount($index, acc.id)">
                               <span class="glyphicon glyphicon-remove"></span>
                               del
                             </button>
                           </div>  
                         </td>
                         <td class="col-md-1">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{acc.id}}" ng-click="fetchTransactions(acc.id)" class="btn btn-warning btn-sm" role="button">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{acc.id}}" class="btn btn-warning btn-sm" role="button">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                           </a>
                         </td>
@@ -123,7 +123,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="trn in trMap[acc.id].content">
+                      <tr ng-repeat="trn in trMap[acc.id]">
                         <td>{{trn.id}}</td>
                         <td>{{trn.date}}</td>
                         <td>{{trn.amount}}</td>
@@ -134,7 +134,7 @@
                   </table>
 
                   <a href="" ng-click="" class="btn btn-primary btn-ms" role="button">
-                    <span class="glyphicon glyphicon-plus"> Add New Transaction</span>
+                    <span class="glyphicon glyphicon-plus">Add New Transaction</span>
                   </a>
               </div>
             </div>
@@ -142,6 +142,33 @@
 
           </div>
 
+<!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Update Account</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" ng-submit="submitform()">
+              <div class="form-group">
+                <label for="accountName">Account Name</label>
+                <input type="text" class="form-control" id="accountName" placeholder="{{}}">
+              </div>
+              <div class="form-group">
+                <label for="accountCode">Account Code</label>
+                <input type="text" class="form-control" id="accountCode" placeholder="{{}}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
           <!-- Pagination -->
             {{acc.length}}
                 <div class="pagination pagination-centered" ng-show="acc.length" >
@@ -177,18 +204,18 @@
             <h4 class="modal-title" id="myModalLabel">Update Account</h4>
           </div>
           <div class="modal-body">
-            <form role="form" ng-submit="submitform()">
+            <form role="form" ng-submit="saveAccount({'name': $('#accountName').val(), 'code': $('#accountCode').val()}, null, null)">
               <div class="form-group">
                 <label for="accountName">Account Name</label>
-                <input type="text" class="form-control" id="accountName" placeholder="{{}}">
+                <input type="text" class="form-control" id="accountName">
               </div>
               <div class="form-group">
                 <label for="accountCode">Account Code</label>
-                <input type="text" class="form-control" id="accountCode" placeholder="{{}}">
+                <input type="text" class="form-control" id="accountCode">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                <button type="button" class="btn btn-primary btn-sm" >Save changes</button>
               </div>
             </form>
           </div>
@@ -200,8 +227,8 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/vendor/bootstrap-editable.min.js"></script>
-    <script src="js/vendor/angular.min.js"></script>
+<!--     <script src="js/vendor/bootstrap-editable.min.js"></script>
+ -->    <script src="js/vendor/angular.min.js"></script>
     <script src="js/vendor/xeditable.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/controllers.js"></script>
