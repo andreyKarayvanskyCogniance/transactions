@@ -82,7 +82,7 @@
                         <td><span class="badge">14</span></td>
                         <td style="white-space: nowrap">
                           <!-- form -->
-                          <form editable-form name="rowform" onbeforesave="saveAccount($data, acc.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == acc">
+                          <form editable-form name="rowform" onbeforesave="saveAccount($data, acc.id, acc.version)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == acc">
                             <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                               save
                             </button>

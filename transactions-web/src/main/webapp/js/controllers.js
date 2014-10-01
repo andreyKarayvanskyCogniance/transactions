@@ -27,10 +27,8 @@ app.controller('AccountListCtrl', function ($scope, $http) {
   };
 
 
-  $scope.saveAccount = function(data, id) {
-        //$scope.user not updated yet
-        angular.extend(data, {id: id});
-        
+  $scope.saveAccount = function(data, id, version) {
+        data['version'] = version;
         if (id) {
             return $http.put('/account/' + id, data);
         } else {
