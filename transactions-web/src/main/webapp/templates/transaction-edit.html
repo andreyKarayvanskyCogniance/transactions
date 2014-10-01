@@ -3,7 +3,7 @@
         <div class="row edit">
             <input class="col-sm-1 col-md-1 col-lg-1 hidden-xs" type="button" value="Cancel" ng-click="editTransactionController.cancelEdit()"/>
             <label class="col-xs-12 hidden-sm hidden-md hidden-lg">Type: </label>
-            <select class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" ng-model="editedTransaction.type"><option value="DEBIT">DEBIT</option><option value="CREDIT">CREDIT</option></select>
+            <select class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" name="type" ng-model="editedTransaction.type" ng-options="value for value in transactionTypes"></select>
             <label class="col-xs-12 hidden-sm hidden-md hidden-lg">Amount: </label>
             <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" ng-class="{'input-error': editTransactionForm.amount.$invalid && !editTransactionForm.amount.$pristine}">
                 <input type="number" ng-model="editedTransaction.amount" required>

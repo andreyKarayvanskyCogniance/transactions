@@ -26,6 +26,7 @@
      */
     transactions.controller('NewTransactionController', ['$scope', 'transactionService', function($scope, transactionService){
         $scope.newTransaction = emptyTransaction();
+		$scope.transactionTypes = getTransactionTypeList();
         this.addNewTransaction = function(accountId){
             transactionService.add(accountId, $scope.newTransaction).success(function(){
                 $scope.newTransaction = emptyTransaction();
@@ -33,16 +34,19 @@
             }).error(function(data){
                 alert('Error: '+data.message);
             });
-        }
+        };
         function emptyTransaction(){
             return {description:"", amount:1, date:new Date()};
         }
+        //apply binding to newTransaction object
+        //$scope.$apply();
     }]);
     /**
      * Controller for editing transaction
      */
     transactions.controller('EditTransactionController', ['$scope', 'transactionService', function($scope, transactionService){
         var currentTransaction = $scope.transaction;
+        console.log(currentTransaction);
         $scope.editedTransaction = (function(){
             var copy = {};
             for(var param in currentTransaction){
@@ -51,6 +55,7 @@
                 }
             }
             delete copy.edited;
+            copy.date = new Date(currentTransaction.date);
             return copy;
         })();
         /**
@@ -63,7 +68,8 @@
          * Save updated transaction and reload transactions list
          */
         this.saveEdit = function(){
-            transactionService.update($scope.editedTransaction).success(function(){
+            delete $scope.editedTransaction.edit;
+            transactionService.update($scope.account.id, $scope.editedTransaction).success(function(){
                 currentTransaction.edit = false;
                 $scope.editedTransaction = {};
                 $scope.loadTransactions();
@@ -185,5 +191,8 @@
      */
     function getDateOnly(timestamp){
         return new Date(timestamp).toISOString().substr(0, 10);
+    }
+    function getTransactionTypeList(){
+        return ['DEBIT', 'CREDIT'];
     }
 })();
