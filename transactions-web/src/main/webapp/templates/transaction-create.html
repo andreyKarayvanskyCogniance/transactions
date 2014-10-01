@@ -1,15 +1,17 @@
 <div ng-controller="NewTransactionController as newTransactionController">
-    <div class="row">
-        <select class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-1 col-md-1 col-lg-1 contentcol"><option>DEBIT</option><option>CREDIT</option></select>
-        <div class="col-sm-1 col-md-1 col-lg-1 contentcol">
-            <input type="text" ng-model="newTransaction.amount" placeholder="Amount" ng-minlength="1" ng-required>
+    <form name="newTransactionform" ng-submit="newTransactionController.addNewTransaction(account.id)">
+        <div class="row">
+            <select class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-1 col-md-1 col-lg-1 contentcol"><option>DEBIT</option><option>CREDIT</option></select>
+            <div class="col-sm-1 col-md-1 col-lg-1 contentcol">
+                <input type="text" ng-model="newTransaction.amount" placeholder="Amount" ng-minlength="1" ng-required>
+            </div>
+            <input class="col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="newTransaction.date" ng-required>
+            <div class="col-sm-7 col-md-7 col-lg-7 contentcol">
+                <input type="text" ng-model="newTransaction.description" placeholder="Enter transaction description" ng-minlength="0" ng-maxlength="100" ng-required>
+            </div>
         </div>
-        <input class="col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="newTransaction.date" ng-required>
-        <div class="col-sm-7 col-md-7 col-lg-7 contentcol">
-            <input type="text" ng-model="newTransaction.description" placeholder="Enter transaction description" ng-minlength="0" ng-maxlength="100" ng-required>
+        <div class="row">
+            <input type="submit" value="Add Transaction" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2">
         </div>
-    </div>
-    <div class="row">
-        <input type="button" value="Add Transaction" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2" ng-click="newTransactionController.addNewTransaction(account.id)">
-    </div>
+    </form>
 </div>

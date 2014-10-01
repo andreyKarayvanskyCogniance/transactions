@@ -1,5 +1,5 @@
 <div ng-controller="EditTransactionController as editTransactionController">
-    <form>
+    <form name="editTransactionForm" ng-submit="editTransactionController.saveEdit()">
         <div class="row edit">
             <input class="col-sm-1 col-md-1 col-lg-1" type="button" value="Cancel" ng-click="editTransactionController.cancelEdit()"/>
             <select class="col-sm-1 col-md-1 col-lg-1 contentcol" ng-model="editedTransaction.type"><option value="DEBIT">DEBIT</option><option value="CREDIT">CREDIT</option></select>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <input class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2" type="submit" value="Save Changes" ng-click="editTransactionController.saveEdit()"/>
+            <input type="submit" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2" value="Save Changes"/>
         </div>
     </form>
 </div>

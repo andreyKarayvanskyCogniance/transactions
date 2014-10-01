@@ -80,14 +80,17 @@
      * Create new account controller
      */
     accounts.controller('NewAccountController', ['$scope', 'accountService', function($scope, accountService){
-        $scope.newAccount = {name:"", code:""};
+        $scope.newAccount = emptyAccount();
         this.addNewAccount = function(){
             accountService.add($scope.newAccount).success(function(){
-                $scope.newAccount = {name:"", code:""};
+                $scope.newAccount = emptyAccount();
                 $scope.loadAccounts();
             }).error(function(data){
                 alert('Error: '+data.message);
             });
+        }
+        function emptyAccount(){
+            return {name:"", code:""};
         }
     }]);
     /**
@@ -102,11 +105,10 @@
                     copy[param] = currentAccount[param];
                 }
             }
-            delete copy.edited;
             return copy;
         })();
         /**
-         * Revert view to nortmal for current account
+         * Revert view to normal for current account
          */
         this.cancelEdit = function(){
             currentAccount.edit = false;
@@ -115,6 +117,7 @@
          * Save account changes and
          */
         this.saveEdit = function(){
+            delete $scope.editedAccount.edit;
             accountService.update($scope.editedAccount).success(function(){
                 currentAccount.edit = false;
                 $scope.editedAccount = {};
@@ -186,7 +189,7 @@
         };
         /**
          * Remove account
-         * @param {Object} data
+         * @param {Object} id
          * @returns {{success: function, error: function}}
          */
         this.remove = function(id){

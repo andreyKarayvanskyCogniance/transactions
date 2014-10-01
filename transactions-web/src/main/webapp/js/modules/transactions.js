@@ -25,14 +25,17 @@
      * Controller for creating new transaction
      */
     transactions.controller('NewTransactionController', ['$scope', 'transactionService', function($scope, transactionService){
-        $scope.newTransaction = {description:"", amount:1, date:new Date()};
+        $scope.newTransaction = emptyTransaction();
         this.addNewTransaction = function(accountId){
             transactionService.add(accountId, $scope.newTransaction).success(function(){
-                $scope.newTransaction = {name:"", code:""};
-                transactionService.list(accountId);
+                $scope.newTransaction = emptyTransaction();
+                $scope.loadTransactions();
             }).error(function(data){
                 alert('Error: '+data.message);
             });
+        }
+        function emptyTransaction(){
+            return {description:"", amount:1, date:new Date()};
         }
     }]);
     /**
@@ -109,7 +112,7 @@
          * @returns {{success: function, error: function}}
          */
         this.has = function (accountId){
-            return $http.get(this.baseUrl(accountId)+"?page=0&size=1").success(listHandler);
+            return $http.get(this.baseUrl(accountId)+"?page=0&size=1");
         };
         /**
          * Load next page for specific account
