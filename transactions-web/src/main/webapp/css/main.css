@@ -1,0 +1,37 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.panel-group {
+
+}
+.panel-info > .panel-heading {
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.jumbotron {
+	margin-top: 50px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.modal-footer {
+	padding-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
