@@ -2,12 +2,12 @@
     <!-- account -->
     <form name="editAccountForm" ng-submit="editAccountController.saveEdit()">
         <input type="button" value="Cancel" class="col-sm-1 col-md-1 col-lg-1 hidden-xs" ng-click="editAccountController.cancelEdit()"/>
-        <div class="col-sm-5 col-md-5 col-lg-5 contentcol"><input type="text" ng-model="editedAccount.name" maxlength="50" ng-required/></div>
-        <div class="col-sm-4 col-md-4 col-lg-4 contentcol"><input type="text" ng-model="editedAccount.code" maxlength="50" ng-required/></div>
-        <input type="submit" value="Save Changes" class="col-sm-2 col-md-2 col-lg-2 hidden-xs"/>
+        <div class="col-sm-5 col-md-5 col-lg-5 contentcol" ng-class="{'input-error': editAccountForm.name.$invalid && !editAccountForm.name.$pristine}"><input type="text" name="name" ng-model="editedAccount.name"  ng-minlength="3" ng-maxlength="50" required/></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 contentcol" ng-class="{'input-error': editAccountForm.code.$invalid && !editAccountForm.code.$pristine}"><input type="text" name="code" ng-model="editedAccount.code" ng-minlength="3" ng-maxlength="50" required/></div>
+        <input type="submit" value="Save Changes" class="col-sm-2 col-md-2 col-lg-2 hidden-xs" ng-disabled="editAccountForm.name.$invalid || editAccountForm.code.$invalid"/>
         <div class="col-xs-12 visible-xs">
             <input type="button" value="Cancel" ng-click="editAccountController.cancelEdit()"/>
-            <input type="submit" value="Save"/>
+            <input type="submit" value="Save" ng-disabled="editAccountForm.name.$invalid || editAccountForm.code.$invalid"/>
         </div>
     </form>
 </div>

@@ -4,18 +4,18 @@
             <label class="col-xs-3 hidden-sm hidden-md hidden-lg">Type: </label>
             <select class="col-xs-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-1 col-md-1 col-lg-1 contentcol"><option>DEBIT</option><option>CREDIT</option></select>
             <label class="col-xs-3 hidden-sm hidden-md hidden-lg">Amount: </label>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol">
-                <input type="text" ng-model="newTransaction.amount" placeholder="Amount" ng-minlength="1" ng-required>
+            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" ng-class="{'input-error': newTransactionform.amount.$invalid && !newTransactionform.amount.$pristine}">
+                <input type="number" name="amount" ng-model="newTransaction.amount" placeholder="Amount" ng-minlength="1" required>
             </div>
             <label class="col-xs-3 hidden-sm hidden-md hidden-lg">Date: </label>
-            <input class="col-xs-12 col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="newTransaction.date" ng-required>
+            <input class="col-xs-12 col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="date" ng-model="newTransaction.date" required>
             <label class="col-xs-3 hidden-sm hidden-md hidden-lg">Description: </label>
-            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 contentcol">
-                <input type="text" ng-model="newTransaction.description" placeholder="Enter transaction description" ng-minlength="0" ng-maxlength="100" ng-required>
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 contentcol" ng-class="{'input-error': newTransactionform.description.$invalid && !newTransactionform.description.$pristine}">
+                <input type="text" name="description" ng-model="newTransaction.description" placeholder="Enter transaction description" ng-minlength="3" ng-maxlength="100" required>
             </div>
         </div>
         <div class="row">
-            <input type="submit" value="Add Transaction" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" value="Add Transaction" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2" ng-disabled="newTransactionform.amount.$invalid || newTransactionform.date.$invalid || newTransactionform.description.$invalid">
         </div>
     </form>
 </div>

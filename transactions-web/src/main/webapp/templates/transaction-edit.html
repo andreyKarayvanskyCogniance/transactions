@@ -5,22 +5,22 @@
             <label class="col-xs-12 hidden-sm hidden-md hidden-lg">Type: </label>
             <select class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" ng-model="editedTransaction.type"><option value="DEBIT">DEBIT</option><option value="CREDIT">CREDIT</option></select>
             <label class="col-xs-12 hidden-sm hidden-md hidden-lg">Amount: </label>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol">
-                <input type="text" ng-model="editedTransaction.amount" ng-required>
+            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 contentcol" ng-class="{'input-error': editTransactionForm.amount.$invalid && !editTransactionForm.amount.$pristine}">
+                <input type="number" ng-model="editedTransaction.amount" required>
             </div>
             <label class="col-xs-12 hidden-sm hidden-md hidden-lg">Date: </label>
-            <input class="col-xs-12 col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="editedTransaction.date" ng-required>
+            <input class="col-xs-12 col-sm-2 col-md-2 col-lg-2 contentcol" type="date" name="transactionDate" ng-model="editedTransaction.date" required>
             <label class="col-xs-1 hidden-sm hidden-md hidden-lg">Description: </label>
-            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 contentcol">
-                <input type="text" ng-model="editedTransaction.description" ng-minlength="0" ng-maxlength="100" ng-required>
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 contentcol" ng-class="{'input-error': editTransactionForm.description.$invalid && !editTransactionForm.description.$pristine}">
+                <input type="text" ng-model="editedTransaction.description" ng-minlength="3" ng-maxlength="100" required>
             </div>
             <div class="col-xs-12 visible-xs">
                 <input type="button" value="Cancel" ng-click="editTransactionController.cancelEdit()"/>
-                <input type="submit" value="Save"/>
+                <input type="submit" value="Save" ng-disabled="editTransactionForm.amount.$invalid || editTransactionForm.date.$invalid || editTransactionForm.description.$invalid"/>
             </div>
         </div>
         <div class="row">
-            <input type="submit" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2 hidden-xs" value="Save Changes"/>
+            <input type="submit" class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10 col-sm-2 col-md-2 col-lg-2 hidden-xs" value="Save Changes" ng-disabled="editTransactionForm.amount.$invalid || editTransactionForm.date.$invalid || editTransactionForm.description.$invalid"/>
         </div>
     </form>
 </div>

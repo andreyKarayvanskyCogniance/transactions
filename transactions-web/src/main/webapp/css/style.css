@@ -20,7 +20,7 @@ html, body{
 .edit{
     outline: 2px solid #eee;
 }
-textarea, input[type=text]{
+textarea, input[type=text], input[type=number]{
     margin: 0;
     width: 100%;
     padding: 0 4px;
@@ -42,10 +42,17 @@ input[type=button], input[type=submit]{
 input[type=button]:hover, input[type=submit]:hover{
     text-decoration: underline;
 }
+input[type=button]:disabled, input[type=submit]:disabled{
+    color: #666666;
+    text-decoration: none !important;
+}
 .even{
     background-color: #ffffff;
 }
 .odd{
     background-color: #f9f9f9;
 
+}
+.input-error{
+    outline: 1px solid #f00 !important;
 }
