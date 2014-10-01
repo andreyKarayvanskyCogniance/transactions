@@ -1,0 +1,46 @@
+<div ng-controller="AccountController as accountController">
+    <div class="row">
+        <!-- account -->
+        <input type="button" value="Edit" class="col-md-1 col-lg-1" ng-click="accountController.editAccount()"/>
+        <div class="col-md-5 col-lg-5">
+            {{account.name}}
+        </div>
+        <div class="col-md-4 col-lg-4">
+            {{account.code}}
+        </div>
+        <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-md-1 col-lg-1 contentcol" ng-click="accountController.switchState()"/>
+        <input type="button" value="Delete" class="col-md-1 col-lg-1" ng-show="isRemovable==true"/>
+    </div>
+    <div ng-if="expanded==true">
+        Transactions:
+        <div class="row header">
+            <div class="col-md-1 col-lg-1"></div>
+            <div class="col-md-1 col-lg-1">
+                Type
+            </div>
+            <div class="col-md-1 col-lg-1">
+                Amount
+            </div>
+            <div class="col-md-2 col-lg-2">
+                Date
+            </div>
+            <div class="col-md-7 col-lg-7">
+                Description
+            </div>
+        </div>
+        <transactionadd></transactionadd>
+        <div ng-repeat="transaction in transactions">
+            <div ng-if="transaction.edit==true">
+                <transactionedit/>
+            </div>
+            <div ng-if="transaction.edit!=true">
+                <transactionview/>
+            </div>
+        </div>
+        <div class="row">
+            <!-- account titles -->
+            <input type="button" value="Prev Page" class="col-md-2 col-lg-2" ng-click="accountController.prevPage()" ng-show="!isFirstTransactionsPage">
+            <input type="button" value="Next Page" class="col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2" ng-click="accountController.nextPage()" ng-show="!isLastTransactionsPage">
+        </div>
+    </div>
+</div>

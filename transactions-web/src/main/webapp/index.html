@@ -1,10 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account/Transactions Manager</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        html, body{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        .nopaddings {
+            padding: 0;
+            text-align: left;
+        }
+        textarea, input[type="text"]{
+            margin: 0;
+            width: 100%;
+            margin: 0;
+        }
+        .header{
+            font-weight: bold;
+            background-color: #eee;
+        }
+        [class*="col-"] {
+            height: 26px;
+        }
+        .contentcol{
+            padding: 0;
+        }
+        .edit{
+            outline: 2px solid #eee;
+        }
+        .row{
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<body>
-    Hello!
+<body ng-app="app">
+<!-- /container -->
+<div class="container-fluid" ng-controller="AppController as appController">
+    <div class="row">
+        <!-- account titles -->
+        <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 nopaddings">
+            <div class="container-fluid">
+                <div class="row header">
+                    <!-- account titles -->
+                    <div class="col-md-1 col-lg-1">
+                        <!-- edit -->
+                    </div>
+                    <div class="col-md-5 col-lg-5">
+                        Account
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        Code
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <!-- view transactions & delete -->
+                    </div>
+                </div>
+                <accountadd></accountadd>
+                <div ng-repeat="account in accounts">
+                    <div ng-if="account.edit==true">
+                        <accountedit/>
+                    </div>
+                    <div ng-if="account.edit!=true">
+                        <accountview/>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- account titles -->
+                    <input type="button" value="Prev Page" class="col-md-2 col-lg-2" ng-click="appController.prevPage()" ng-show="!isFirstPage">
+                    <input type="button" value="Next Page" class="col-md-offset-8 col-lg-offset-8 col-md-2 col-lg-2" ng-click="appController.nextPage()" ng-show="!isLastPage">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/angular.min.js" type="text/javascript"></script>
+<script src="js/modules/transactions.js" type="text/javascript"></script>
+<script src="js/modules/accounts.js" type="text/javascript"></script>
+<script src="js/modules/application.js" type="text/javascript"></script>
 </body>
 </html>
