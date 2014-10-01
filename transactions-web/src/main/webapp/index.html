@@ -6,39 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Account/Transactions Manager</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <style type="text/css">
-        html, body{
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-        .nopaddings {
-            padding: 0;
-            text-align: left;
-        }
-        textarea, input[type="text"]{
-            margin: 0;
-            width: 100%;
-            margin: 0;
-        }
-        .header{
-            font-weight: bold;
-            background-color: #eee;
-        }
-        [class*="col-"] {
-            height: 26px;
-        }
-        .contentcol{
-            padding: 0;
-        }
-        .edit{
-            outline: 2px solid #eee;
-        }
-        .row{
-            margin-bottom: 10px;
-        }
-    </style>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body ng-app="app">
 <!-- /container -->
@@ -47,6 +15,11 @@
         <!-- account titles -->
         <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 nopaddings">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <h4>Accounts:</h4>
+                    </div>
+                </div>
                 <div class="row header">
                     <!-- account titles -->
                     <div class="col-md-1 col-lg-1">
@@ -80,6 +53,7 @@
         </div>
     </div>
 </div>
+<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="js/angular.min.js" type="text/javascript"></script>
 <script src="js/modules/transactions.js" type="text/javascript"></script>

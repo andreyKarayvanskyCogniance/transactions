@@ -29,7 +29,6 @@
                 }
             }
             delete copy.edited;
-            copy.date = copy.date;
             return copy;
         })();
         this.cancelEdit = function(){
@@ -39,7 +38,7 @@
             transactionService.update($scope.editedTransaction).success(function(){
                 currentTransaction.edit = false;
                 $scope.editedTransaction = {};
-                transactionService.list($scope.account.id);
+                $scope.loadTransactions();
             }).error(function(data){
                 alert('Error: '+data.message);
             });
@@ -76,9 +75,6 @@
         this.prevPage = function(accountId){
             this.currentPage = Math.max(0, this.currentPage-1);
             return this.list(accountId);
-        };
-        this.get = function(accountId, id){
-            return $http.get(this.baseUrl(accountId)+"/"+id);
         };
         this.add = function(accountId, data){
             return $http.post(this.baseUrl(accountId), data);

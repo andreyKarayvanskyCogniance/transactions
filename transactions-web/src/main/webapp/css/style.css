@@ -1,0 +1,30 @@
+        html, body{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        .nopaddings {
+            padding: 0;
+            text-align: left;
+        }
+        textarea, input[type="text"]{
+            margin: 0;
+            width: 100%;
+            margin: 0;
+        }
+        .header{
+            font-weight: bold;
+            background-color: #eee;
+        }
+        [class*="col-"] {
+            height: 26px;
+        }
+        .contentcol{
+            padding: 0;
+        }
+        .edit{
+            outline: 2px solid #eee;
+        }
+        .row{
+            margin-bottom: 10px;
+        }

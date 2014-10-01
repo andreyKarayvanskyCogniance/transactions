@@ -10,55 +10,43 @@
         };
         this.deleteAccount = function(){
             accountService.remove($scope.account.id).success(function(){
-                accountService.list();
-            }).error(function(data){
-                alert('Error: '+data.message);
-            });
+                $scope.loadAccounts();
+            }).error(transactionsListErrorHandler);
         };
         this.switchState = function(){
             $scope.expanded = !$scope.expanded;
             if($scope.expanded){
-                this.loadTransactions($scope.account.id);
+                $scope.loadTransactions();
             }
         };
-        this.loadTransactions = function(id){
-            transactionService.list($scope.account.id).success((function(data){
-                $scope.transactions = data.content;
-                /*
-                $scope.transactions = [
-                    {"id":1,"version":0,"date":1412162779153,"amount":10.00,"type":"DEBIT","description":"A Demo Transaction"},
-                    {"id":2,"version":0,"date":1412162779153,"amount":11.00,"type":"DEBIT","description":"A Demo Transaction"},
-                    {"id":3,"version":0,"date":1412162779153,"amount":12.00,"type":"CREDIT","description":"A Demo Transaction"},
-                    {"id":4,"version":0,"date":1412162779153,"amount":13.00,"type":"DEBIT","description":"A Demo Transaction"},
-                    {"id":5,"version":0,"date":1412162779153,"amount":14.00,"type":"CREDIT","description":"A Demo Transaction"},
-                    {"id":6,"version":0,"date":1412162779153,"amount":15.00,"type":"DEBIT","description":"A Demo Transaction"},
-                    {"id":7,"version":0,"date":1412162779153,"amount":16.00,"type":"DEBIT","description":"A Demo Transaction"}
-                ];
-                */
-                $scope.isFirstTransactionsPage = transactionService.currentPage<=0;
-                $scope.isLastTransactionsPage = transactionService.currentPage>=transactionService.lastPage;
-            }).bind(this)).error(function(data){
-                alert('Error: '+data.message);
-            });
+        $scope.loadTransactions = this.loadTransactions = function(){
+            transactionService.list($scope.account.id).success(transactionsListLoadedHandler).error(transactionsListErrorHandler);
         };
         this.nextPage = function(){
-            transactionService.nextPage($scope.account.id);
+            transactionService.nextPage($scope.account.id).success(transactionsListLoadedHandler).error(transactionsListErrorHandler);
         };
         this.prevPage = function(){
-            transactionService.prevPage($scope.account.id);
+            transactionService.prevPage($scope.account.id).success(transactionsListLoadedHandler).error(transactionsListErrorHandler);
         };
+        function transactionsListLoadedHandler(data){
+            $scope.transactions = data.content;
+            $scope.isFirstTransactionsPage = transactionService.currentPage<=0;
+            $scope.isLastTransactionsPage = transactionService.currentPage>=transactionService.lastPage;
+        }
+        function transactionsListErrorHandler(data){
+            alert('Error: '+data.message);
+        }
         transactionService.has($scope.account.id).success(function(data){
             $scope.isRemovable = !(data && data.content && data.content.length);
-        }).error(function(data){
-            alert('Error: '+data.message);
-        });
+        }).error(transactionsListErrorHandler);
     }]);
     accounts.controller('NewAccountController', ['$scope', 'accountService', function($scope, accountService){
         $scope.newAccount = {name:"", code:""};
         this.addNewAccount = function(){
             accountService.add($scope.newAccount).success(function(){
                 $scope.newAccount = {name:"", code:""};
-                accountService.list();
+                console.log('save new account');
+                $scope.loadAccounts();
             }).error(function(data){
                 alert('Error: '+data.message);
             });
@@ -83,7 +71,8 @@
             accountService.update($scope.editedAccount).success(function(){
                 currentAccount.edit = false;
                 $scope.editedAccount = {};
-                accountService.list();
+                console.log('save updated account');
+                $scope.loadAccounts();
             }).error(function(data){
                 alert('Error: '+data.message);
             });

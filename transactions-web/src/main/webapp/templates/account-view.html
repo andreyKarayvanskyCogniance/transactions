@@ -9,10 +9,10 @@
             {{account.code}}
         </div>
         <input type="button" value="{{expanded ? 'Collapse' : 'Expand'}}" class="col-md-1 col-lg-1 contentcol" ng-click="accountController.switchState()"/>
-        <input type="button" value="Delete" class="col-md-1 col-lg-1" ng-show="isRemovable==true"/>
+        <input type="button" value="Delete" class="col-md-1 col-lg-1" ng-show="isRemovable==true" ng-click="accountController.deleteAccount()"/>
     </div>
     <div ng-if="expanded==true">
-        Transactions:
+        <h4>Transactions for "{{account.name}}":</h4>
         <div class="row header">
             <div class="col-md-1 col-lg-1"></div>
             <div class="col-md-1 col-lg-1">
