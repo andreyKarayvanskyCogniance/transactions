@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css"/>
+    <link rel="stylesheet" href="css/xeditable.css"/>
     <link rel="stylesheet" href="css/main.css">
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -35,7 +37,8 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <h3>Hello, this is Transactions demo application!</h3>
-          <p><a class="btn btn-primary" role="button">Add Account</a></p>
+          <a class="btn btn-primary" role="button" ng-click="addAccount()">Add Account</a>
+          
         </div>
       </div>
     </div>
@@ -46,7 +49,6 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
         <div class="panel-group" id="accordion" ng-controller="AccountListCtrl">
-          
           <div class="panel panel-info" ng-repeat="acc in accounts.content | pagination: curPage * pageSize | limitTo: pageSize">
             <div class="panel-heading">
               <h4 class="panel-title">
@@ -68,19 +70,19 @@
                         <td>{{acc.id}}</td>
                         <td>
                           <!-- editable username (text with validation) -->
-                          <span editable-text="acc.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+                          <span editable-text="acc.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, acc.id)" e-required>
                             {{ acc.name || 'empty' }}
                           </span>
                         </td>
                         <td>
-                          <span editable-select="acc.code" e-name="code" e-form="rowform" onbeforesave="checkCode($data, user.id)" e-required>
+                          <span editable-text="acc.code" e-name="code" e-form="rowform" onbeforesave="checkCode($data, acc.id)" e-required>
                             {{ acc.code || 'empty' }}
                           </span>
                         </td>
                         <td><span class="badge">14</span></td>
                         <td style="white-space: nowrap">
                           <!-- form -->
-                          <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                          <form editable-form name="rowform" onbeforesave="saveAccount($data, acc.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == acc">
                             <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                               save
                             </button>
@@ -93,7 +95,7 @@
                               <span class="glyphicon glyphicon-edit"></span>
                               edit
                             </button>
-                            <button class="btn btn-danger btn-xs" ng-click="removeUser($index)">
+                            <button class="btn btn-danger btn-xs" ng-click="removeAccount($index)">
                               <span class="glyphicon glyphicon-remove"></span>
                               del
                             </button>
@@ -203,8 +205,9 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 
     <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/bootstrap-editable.min.js"></script>
     <script src="js/vendor/angular.min.js"></script>
-
+    <script src="js/vendor/xeditable.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/controllers.js"></script>
   </body>

@@ -1,15 +1,19 @@
-var app = angular.module('transactionsApp', []);
+var app = angular.module('transactionsApp', ['xeditable']);
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
 
 app.controller('AccountListCtrl', function ($scope, $http) {
 
   $http.get('account').success(function(data) {
     $scope.accounts = data;
-    
+
     $scope.curPage = 0;
- 	  $scope.pageSize = 7;
-   	$scope.numberOfPages = function() {
-  		return Math.ceil($scope.accounts.length / $scope.pageSize);
-  	};
+    $scope.pageSize = 7;
+    $scope.numberOfPages = function() {
+        return Math.ceil($scope.accounts.length / $scope.pageSize);
+    };
 
   });
   
@@ -22,23 +26,27 @@ app.controller('AccountListCtrl', function ($scope, $http) {
     });
   };
 
-  $scope.editorEnabled = false;
 
-  $scope.enableEditor = function() {
-    $scope.editorEnabled = true;
-    $scope.editableTitle = $scope.accounts.account.name;
+  $scope.saveAccount = function(data, id) {
+        //$scope.user not updated yet
+        angular.extend(data, {id: id});
+        
+        if (id) {
+            return $http.put('/account/' + id, data);
+        } else {
+            return $http.post('/account', data);
+        }
   };
-
-  $scope.disableEditor = function() {
-    $scope.editorEnabled = false;
+  
+//add account
+  $scope.addAccount = function() {
+    $scope.inserted = {
+      id: null,
+      name: '',
+      code: ''
+    };
+    $scope.users.push($scope.inserted);
   };
-
-  $scope.save = function() {
-    $scope.accounts.account.name = $scope.editableTitle;
-    $scope.disableEditor();
-    //$http.post('/account', item);
-  };
-
 });
 
 angular.module('transactionsApp').filter('pagination', function() {
